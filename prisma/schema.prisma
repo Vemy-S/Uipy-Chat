@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id Int @id @default(autoincrement())
+  username String @unique
+  password String
+
+  groups GroupMembers[] 
+  sentMessages Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+  creatorGroup Group[] @relation("CreatorGroup")
+  
+}
+
+model Message {
+  message_id Int @id @default(autoincrement())
+  content String
+  senderId Int
+  receiverId Int
+  groupSender Int?
+
+  sender User @relation("SentMessages", fields: [senderId], references: [user_id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [user_id])
+  group Group? @relation(fields: [groupSender], references: [group_id])
+}
+
+model Group {
+  group_id Int @id @default(autoincrement())
+  name String
+  creatorId Int
+  membersId Int
+  
+  messages Message[]
+  members GroupMembers[]
+  creator User @relation("CreatorGroup", fields: [creatorId], references: [user_id])
+  
+}
+
+model GroupMembers {
+  userId Int
+  groupId Int
+
+  user User @relation(fields: [userId], references: [user_id])
+  group Group @relation(fields: [groupId], references: [group_id])
+  
+  @@id([userId, groupId])
+}
