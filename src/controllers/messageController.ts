@@ -38,10 +38,14 @@ export const sendPrivate = async(req:CustomRequest, res:Response) => {
         const sendMessage = await prisma.message.create({
             data: {
                 content: parseMessage.data.content,
-                receiverId: parseMessage.data.receiverId,
-                senderId: parseMessage.data.senderId
+                sender: {
+                    connect: { user_id: parseMessage.data.senderId }
+                },
+                receiver: {
+                    connect: { user_id: parseMessage.data.receiverId }
+                }
             }
-        })
+        }) 
 
         res.json(sendMessage)
 
@@ -54,13 +58,13 @@ export const getMessages = async(req: CustomRequest, res: Response) =>{
     const { user_id } = req.user
     try {
         const messages = await prisma.message.findMany({
-            where: { receiverId: user_id },
-            select:{
-                message_id: true,
-                content: true,
-                receiverId: true,
-                senderId: true
+           where: { receiverId: user_id },
+           include: {sender: {
+            select: {
+                user_id: true,
+                username: true,
             }
+           }}
         })
 
         res.json(messages)
