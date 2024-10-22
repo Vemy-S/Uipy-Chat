@@ -6,13 +6,15 @@ import { useMessageStore } from "../store/useMessageStore"
 import { useSearchStore } from "../store/searchStore"
 import { IoIosSend } from "react-icons/io";
 
+
 export default function MessageForm() {
   const user = useAuthStore(state => state.credentials)
   const setMessage = useMessageStore(state => state.setMessage)
   const message = useMessageStore(state => state.message)
   const setTemporalMessage = useMessageStore(state => state.setTemporalMessage)
   const searchedUser = useSearchStore(state => state.searchedUser)
-  
+
+
   const { id } = useParams()
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement> ) => {
@@ -73,12 +75,12 @@ export default function MessageForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-indigo-950 p-1"
+      className="p-1 m-2 rounded-lg"
     >
       <div className="flex">
         <textarea 
           id="message"
-          className="bg-white rounded-lg w-full p-2 m-2 outline-none "
+          className="bg-gray-200 rounded-lg w-full p-3 m-2 outline-none border border-gray-300 focus:border-blue-400"
           rows={1}
           style={{ resize: "none" }}
           placeholder="Escribe..."
@@ -86,10 +88,12 @@ export default function MessageForm() {
           onChange={handleInput}
         />
          <button 
-          type="submit" 
-          className="bg-indigo-950 rounded-xl p-2 m-2"
-         ><IoIosSend size={25} className="text-white"/>
-         </button>
+  type="submit" 
+  className="bg-indigo-400 hover:bg-indigo-600 transition-colors duration-200 rounded-xl p-3 m-2"
+>
+  <IoIosSend size={25} className="text-white"/>
+</button>
+
       </div>
     </form>
   )

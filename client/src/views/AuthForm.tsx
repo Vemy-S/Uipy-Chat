@@ -48,7 +48,7 @@ export default function AuthForm({ handleSubmit, handleInput, formValues, mode }
         </div>
         <button 
             type="submit"
-            className="p-3 bg-indigo-600 rounded-full w-full text-white mt-8 "
+            className="p-3 bg-gray-600 rounded-full w-full text-white mt-8 "
         >
             {mode === 'login' ? 'Iniciar Sesión' : 'Registrarse'}
         </button>

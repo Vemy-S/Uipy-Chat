@@ -26,25 +26,23 @@ export default function Chat() {
   }
 
   return (
-    <section className=" grid md:grid-cols-2">
+    <section className="grid md:grid-cols-3 min-h-screen px-4 md:px-6 gap-6">
       
-        <aside className="">
+      <aside className="rounded-lg bg-gray-100 border border-gray-300 shadow-lg p-4">
+        <UserCard handleLogout={handleLogout} />
+        <h1 className="text-2xl font-bold m-2">Chats</h1>
+        <Search />
+        <TitleDivider />
+        <ContactList />
+      </aside>
 
-        <UserCard
-          handleLogout={handleLogout}
-        />
-        <h1 className="text-2xl font-bold">Chats</h1> 
-          <Search/>
-          <TitleDivider/>
-          <ContactList/>
-        </aside>
+      <section className="flex flex-col col-span-2 ml-4 bg-slate-50 rounded-lg p-4 shadow-md"> {/*ACA TA PA CAMBIAR EL COLOR DE LO Q YO SE */}
+        <MessageList />
+        <div className="bg-gray-800 p-2 rounded-b-lg">
+          <MessageForm />
+        </div>
+      </section>
 
-        <section className="flex flex-col">
-            <MessageList/>
-            <div>
-                <MessageForm/>
-            </div>
-        </section>
-    </section>
+</section>
   )
 }
