@@ -14,7 +14,6 @@ export default function Search() {
 
   const getSearchUser = useSearchStore(state => state.getSearchUser)
  
-
   useEffect(()=> {
     if(username){
       const fetchSearchedUser = async() => {

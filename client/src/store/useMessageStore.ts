@@ -1,28 +1,5 @@
 import { create } from "zustand";
-
-//TEST, esto se puede manejar con interface y extends para solo incluir sender y receiver.
-export type CreatedMessage = {
-    content: string,
-    senderId: number,
-    receiverId: number,
-    groupSender: string | null,
-}
-
-type Message = {
-    message_id: number,
-    content: string,
-    senderId: number,
-    receiverId: number,
-    groupSender: string | null,
-    sender: {
-        username: string,
-        user_id: number
-    },
-    receiver: {
-        username: string,
-        user_id: number
-    }
-}
+import type { Message, CreatedMessage } from "../types";
 
 type useMessageStore = {
     messageList: Message[],
@@ -50,5 +27,4 @@ export const useMessageStore = create<useMessageStore>((set)=> ({
             messageList: [...state.messageList, socketMessage ]
         }))
     },
-
 }))

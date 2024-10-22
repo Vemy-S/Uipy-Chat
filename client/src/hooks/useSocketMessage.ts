@@ -1,22 +1,7 @@
 import { useEffect } from "react";
 import { useMessageStore } from "../store/useMessageStore";
 import { useSocketStore } from "../store/useSocketStore";
-
-type Message = { // mover, existe, cambiar
-    message_id: number,
-    content: string,
-    senderId: number,
-    receiverId: number,
-    groupSender: string | null,
-    sender: {
-        username: string,
-        user_id: number
-    },
-    receiver: {
-        username: string,
-        user_id: number
-    }
-}
+import type { Message } from "../types";
 
 export const useSocketMessages = () => {
     const socket = useSocketStore(state => state.socket)

@@ -5,15 +5,13 @@ import { useSocketStore } from "../store/useSocketStore"
 import { useMessageStore } from "../store/useMessageStore"
 import { useSearchStore } from "../store/searchStore"
 import { IoIosSend } from "react-icons/io";
-
+import type { Message } from "../types"
 
 export default function MessageForm() {
   const user = useAuthStore(state => state.credentials)
-  const setMessage = useMessageStore(state => state.setMessage)
-  const message = useMessageStore(state => state.message)
-  const setTemporalMessage = useMessageStore(state => state.setTemporalMessage)
   const searchedUser = useSearchStore(state => state.searchedUser)
 
+  const { setMessage, setTemporalMessage, message } = useMessageStore()
 
   const { id } = useParams()
 
@@ -34,7 +32,9 @@ export default function MessageForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     const messageToSend: any = message
+    console.log(messageToSend)
     //TEST
     if(!messageToSend) return
 
@@ -58,7 +58,7 @@ export default function MessageForm() {
 
   const socket = useSocketStore(state => state.socket)
 
-  const sendMessageSocket = (message: any) => {
+  const sendMessageSocket = (message: Message) => {
     const messageWithUsername = {
       ...message,
       receiver: {

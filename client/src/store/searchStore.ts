@@ -1,13 +1,16 @@
 import { create } from "zustand";
+import type { User } from "../types";
 
 type useSearchStore = {
     searchedUser: {
         user_id: number,
         username: string
     }
-    getSearchUser: (user: any) => void,
+    getSearchUser: (user: User) => void,
     clearSearchedUser: () => void
 }
+
+
 
 export const useSearchStore = create<useSearchStore>((set)=> ({
     searchedUser: {
@@ -16,6 +19,7 @@ export const useSearchStore = create<useSearchStore>((set)=> ({
     },
     getSearchUser: (user) => {
         if(!user) return
+        console.log('Info user, getSearchUser', user)
         set({searchedUser: user})
     },
     clearSearchedUser: () => {
