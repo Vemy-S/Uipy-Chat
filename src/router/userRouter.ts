@@ -1,15 +1,9 @@
-import { Router } from 'express'
-import { login, register } from '../controllers/userController'
-import { CustomRequest } from '../middleware/authenticate'
-
+import { Router } from "express";
+import { searchUser } from "../controllers/userController";
+import { Autenthicate } from "../middleware/authenticate";
 
 const router = Router()
 
-router.post('/register', register)
-router.post('/login', login)
-
-
-
-
+router.get('/search', Autenthicate, searchUser)
 
 export default router

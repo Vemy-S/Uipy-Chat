@@ -8,7 +8,10 @@ export interface decoded extends User {
 }
 
 export interface CustomRequest extends Request {
-    user?: decoded | JwtPayload
+    user?: decoded | JwtPayload,
+    query: {
+        username: string
+    }
 }
 
 export const Autenthicate = async (req: CustomRequest, res:Response, next:NextFunction) => {
