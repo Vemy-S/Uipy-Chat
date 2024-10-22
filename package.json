@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "react-hook-form": "^7.53.0"
-=======
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
@@ -23,7 +19,8 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "socket.io": "^4.8.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "react-hook-form": "^7.53.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -35,6 +32,5 @@
     "prisma": "^5.20.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.2"
->>>>>>> a7a7be1473e4a88ae89d08ff1bd7ef841d90037b
   }
 }
